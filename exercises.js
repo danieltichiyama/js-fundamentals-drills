@@ -313,7 +313,7 @@ var getObjectKeys = function (obj){
   }
   return keyArr;
 };
-//TWENTY!
+
 /* #getObjectValues
  *
  * Takes in an object and returns an array of all the object's values.
@@ -321,7 +321,13 @@ var getObjectKeys = function (obj){
  * @param {Object}
  * @return {Array}
  */
-var getObjectValues;
+var getObjectValues = function (obj){
+  var valuesArr = [];
+  for (key in obj){
+    valuesArr.push(obj[key]);
+  }
+  return valuesArr;
+};
 
 /* #makeObject
  *
@@ -331,7 +337,11 @@ var getObjectValues;
  * @param {String}
  * @return {Object}
  */
-var makeObject;
+var makeObject = function (str1, str2){
+  obj = {};
+  obj[str1] = str2;
+  return obj;
+};
 
 /* #makeObjectReverse
  *
@@ -341,7 +351,11 @@ var makeObject;
  * @param {String}
  * @return {Object}
  */
-var makeObjectReverse;
+var makeObjectReverse = function (str1, str2){
+  obj = {};
+  obj[str2] = str1;
+  return obj;
+};
 
 /* #tupleToObject
  *
@@ -350,7 +364,10 @@ var makeObjectReverse;
  * @param {Array}
  * @return {Object}
  */
-var tupleToObject;
+var tupleToObject = function (arr){
+  var arrObj = makeObject(arr[0],arr[1]);
+  return arrObj;
+};
 
 /* #tupleToObjectReverse
  *
@@ -359,7 +376,10 @@ var tupleToObject;
  * @param {Array}
  * @return {Object}
  */
-var tupleToObjectReverse;
+var tupleToObjectReverse = function (arr){
+  var arrObj = makeObjectReverse(arr[0],arr[1]);
+  return arrObj;
+};
 
 /* #strToKeys
  *
@@ -368,8 +388,14 @@ var tupleToObjectReverse;
  * @param {Array}
  * @return {Object}
  */
-var strToKeys;
-
+var strToKeys = function (arr){
+  var arrObj={};
+  for (i=0;i<arr.length;i++){
+    arrObj[arr[i]] = 0;
+  }
+  return arrObj;
+};
+//??
 /* #getValues
  *
  * Takes in an object and returns an array of all the object's values.
@@ -377,7 +403,7 @@ var strToKeys;
  * @param {Object}
  * @return {Array}
  */
-var getValues;
+var getValues = getObjectValues;
 
 /* #getKeys
  *
@@ -386,7 +412,7 @@ var getValues;
  * @param {Object}
  * @return {Array}
  */
-var getKeys;
+var getKeys = getObjectKeys;
 
 /* #objectToArray
  *
@@ -396,7 +422,16 @@ var getKeys;
  * @param {Object}
  * @return {Array}
  */
-var objectToArray;
+var objectToArray = function (obj){
+  tupleArr = [];
+  for (key in obj){
+    var tuple = [];
+    tuple.push (key);
+    tuple.push (obj[key]);
+    tupleArr.push(tuple);
+  }
+  return tupleArr;
+};
 
 /* #arrayToObject
  *
@@ -406,7 +441,13 @@ var objectToArray;
  * @param {Array}
  * @return {Object}
  */
-var arrayToObject;
+var arrayToObject = function (arr){
+  arrObj = strToKeys (arr);
+  for (key in arrObj){
+    arrObj[key] = false;
+  }
+  return arrObj;
+};
 
 //THIRTY!
 /* #arraysToObject
@@ -520,16 +561,16 @@ module.exports = {
   stringCountBelowThree: stringCountBelowThree,
   countObjects: countObjects,
   getObjectKeys: getObjectKeys,
-  getObjectValues: null,
-  makeObject: null,
-  makeObjectReverse: null,
-  tupleToObject: null,
-  tupleToObjectReverse: null,
-  strToKeys: null,
-  getValues: null,
-  getKeys: null,
-  objectToArray: null,
-  arrayToObject: null,
+  getObjectValues: getObjectValues,
+  makeObject: makeObject,
+  makeObjectReverse: makeObjectReverse,
+  tupleToObject: tupleToObject,
+  tupleToObjectReverse: tupleToObjectReverse,
+  strToKeys: strToKeys,
+  getValues: getValues,
+  getKeys: getKeys,
+  objectToArray: objectToArray,
+  arrayToObject: arrayToObject,
   arraysToObject: null,
   objectsToTuples: null,
   mapArrayValues: null,
