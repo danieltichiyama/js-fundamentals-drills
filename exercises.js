@@ -202,7 +202,7 @@ var lengthOfLast = function (arr){
  */
 var sumBelowTen = function (arr){
   sum = 0;
-  for (i=0;i,arr.length;i++){
+  for (i=0;i<arr.length;i++){
     if(arr[i]>=10){
       sum = sum;
     }else{
@@ -254,7 +254,7 @@ var multiplyAll = function (arr){
  * @return {Number}
  */
 var sumAllPositive = function (arr){
-  sumPositive = 0;
+  var sumPositive = 0;
   for (i=0;i<arr.length;i++){
     if (arr[i]>0){
       sumPositive += arr[i];
@@ -270,7 +270,16 @@ var sumAllPositive = function (arr){
  * @param {Array}
  * @return {Number}
  */
-var stringCountBelowThree;
+var stringCountBelowThree = function (arr){
+  var count = 0;
+  var countArr = countStrings(arr);
+  for (i=0;i<countArr.length;i++){
+    if (countArr[i]<=3){
+      count++;
+    }
+  }
+  return count;
+};
 
 /* #countObjects
  *
@@ -279,7 +288,16 @@ var stringCountBelowThree;
  * @param {Array}
  * @return {Number}
  */
-var countObjects;
+var countObjects = function (arr){
+  count = 0;
+  for (i=0;i<arr.length;i++){
+    if (typeof arr[i]!=='object'){
+      count = count;
+    }
+    count++;
+  }
+  return count;
+};
 
 /* #getObjectKeys
  *
@@ -288,7 +306,13 @@ var countObjects;
  * @param {Object}
  * @return {Array}
  */
-var getObjectKeys;
+var getObjectKeys = function (obj){
+  keyArr = [];
+  for (key in obj){
+    keyArr.push(key);
+  }
+  return keyArr;
+};
 //TWENTY!
 /* #getObjectValues
  *
@@ -486,16 +510,16 @@ module.exports = {
   convertToArray: convertToArray,
   objectSize: objectSize,
   createZeroFilledArray: createZeroFilledArray,
-  poppedArray: null,
-  splitString: null,
-  lengthOfLast: null,
-  sumBelowTen: null,
-  moreThanTenLetters: null,
-  multiplyAll: null,
-  sumAllPositive: null,
-  stringCountBelowThree: null,
-  countObjects: null,
-  getObjectKeys: null,
+  poppedArray: poppedArray,
+  splitString: splitString,
+  lengthOfLast: lengthOfLast,
+  sumBelowTen: sumBelowTen,
+  moreThanTenLetters: moreThanTenLetters,
+  multiplyAll: multiplyAll,
+  sumAllPositive: sumAllPositive,
+  stringCountBelowThree: stringCountBelowThree,
+  countObjects: countObjects,
+  getObjectKeys: getObjectKeys,
   getObjectValues: null,
   makeObject: null,
   makeObjectReverse: null,
