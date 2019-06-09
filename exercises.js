@@ -395,7 +395,7 @@ var strToKeys = function (arr){
   }
   return arrObj;
 };
-//??
+
 /* #getValues
  *
  * Takes in an object and returns an array of all the object's values.
@@ -449,7 +449,6 @@ var arrayToObject = function (arr){
   return arrObj;
 };
 
-//THIRTY!
 /* #arraysToObject
  *
  * takes in two arrays, the first array elements will be keys of an object and second array elements 
@@ -459,7 +458,15 @@ var arrayToObject = function (arr){
  * @param {Array}
  * @return {Object}
  */
-var arraysToObject;
+var arraysToObject = function (arr1,arr2){
+  obj = strToKeys (arr1);
+  i=0;
+  for (key in obj){
+    obj[key] = arr2[i];
+    i++;
+  }
+  return obj;
+};
 
 /* #objectsToTuples
  *
@@ -469,7 +476,12 @@ var arraysToObject;
  * @param {Object}
  * @return {Array}
  */
-var objectsToTuples;
+var objectsToTuples = function (obj1, obj2){
+  var arr1 = objectToArray(obj1);
+  var arr2 = objectToArray(obj2);
+  finalArr = arr1.concat(arr2);
+  return finalArr;
+};
 
 /* #mapArrayValues
  *
@@ -478,7 +490,13 @@ var objectsToTuples;
  * @param {Array}
  * @return {Object}
  */
-var mapArrayValues;
+var mapArrayValues = function (arr){
+  var obj = strToKeys(arr);
+  for (key in obj){
+    obj[key]=true;
+  }
+  return obj;
+};
 
 /* #mapStringCounts
  *
@@ -489,7 +507,17 @@ var mapArrayValues;
  * @param {Array}
  * @return {Object}
  */
-var mapStringCounts;
+var mapStringCounts = function (arr){
+  var obj = strToKeys(arr)
+  for (key in obj){
+    if (key.length >=5){
+      obj[key]=true;
+    }else{
+      obj[key]= false;
+    }
+  }
+  return obj;
+};
 
 /* #arrayToObjectNums
  *
@@ -499,7 +527,13 @@ var mapStringCounts;
  * @param {Array}
  * @return {Object}
  */
-var arrayToObjectNums;
+var arrayToObjectNums = function (arr){
+  var obj = strToKeys (arr)
+  for (key in obj){
+    obj[key]=true;
+  }
+  return obj;
+};
 
 /* #stringToKeys
  *
@@ -508,7 +542,11 @@ var arrayToObjectNums;
  * @param {String}
  * @return {Object}
  */
-var stringToKeys;
+var stringToKeys = function (str){
+  var arr= splitString(str);
+  var obj = arrayToObjectNums(arr);
+  return obj;
+};
 
 /* #charCountMap
  *
@@ -518,7 +556,13 @@ var stringToKeys;
  * @param {Array}
  * @return {Object}
  */
-var charCountMap;
+var charCountMap = function (arr){
+  var obj = strToKeys (arr);
+  for (key in obj){
+    obj[key]=key.length;
+  }
+  return obj;
+};
 
 /* #frequencyMap
  *
@@ -527,7 +571,24 @@ var charCountMap;
  * @param {String}
  * @return {Object}
  */
-var frequencyMap;
+var frequencyMap = function (arr){
+  // console.log(arr);
+  var obj = {};
+  for (i=0;i<arr.length;i++){
+    count = 0;
+    // console.log ("i lvl = " +arr[i]);
+    for (j=0;j<arr.length;j++){
+      if (arr[i]===arr[j]){
+        count++;
+      }
+      // console.log("j lvl = " + arr[j]+", and the count is at "+count);
+    }
+    // console.log(count);
+    obj[arr[i]]=count;
+    // console.log(obj);
+  }
+  return obj;
+};
 
 /* #tupleConvertToObject
  *
@@ -537,7 +598,19 @@ var frequencyMap;
  * @param {String}
  * @return {Object}
  */
-var tupleConvertToObject;
+var tupleConvertToObject = function (arr){
+  // console.log(arr)
+  var obj = {};
+  for (i=0;i<arr.length;i++){
+    var keyValue = tupleToObject(arr[i]);
+    // console.log(keyValue);
+    for (key in keyValue){
+      obj[key] = keyValue[key];
+    }
+  }
+  // console.log(obj);
+  return obj;
+};
 
 
 module.exports = {
@@ -571,13 +644,13 @@ module.exports = {
   getKeys: getKeys,
   objectToArray: objectToArray,
   arrayToObject: arrayToObject,
-  arraysToObject: null,
-  objectsToTuples: null,
-  mapArrayValues: null,
-  mapStringCounts: null,
-  arrayToObjectNums: null,
-  stringToKeys: null,
-  charCountMap: null,
-  frequencyMap: null,
-  tupleConvertToObject: null
+  arraysToObject: arraysToObject,
+  objectsToTuples: objectsToTuples,
+  mapArrayValues: mapArrayValues,
+  mapStringCounts: mapStringCounts,
+  arrayToObjectNums: arrayToObjectNums,
+  stringToKeys: stringToKeys,
+  charCountMap: charCountMap,
+  frequencyMap: frequencyMap,
+  tupleConvertToObject: tupleConvertToObject
 }
